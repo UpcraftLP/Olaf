@@ -1,0 +1,30 @@
+language: java
+before_install:
+    - chmod +x gradlew
+install:
+    - "./gradlew setupCiWorkspace"
+script:
+    - "./gradlew clean build"
+jdk:
+    - oraclejdk8
+before_cache:
+    - find $HOME/.gradle/ -name '*.lock' -print -exec rm -f {} \;
+cache:
+    directories:
+        - "$HOME/.gradle/caches/"
+        - "$HOME/.gradle/wrapper/"
+sudo: false
+before_deploy:
+    - echo "deploying to GitHub release $TRAVIS_TAG:"
+    - echo $(ls  | tr '\n' ', ')
+deploy:
+    provider: releases
+    api_key:
+        secure: kJP295aKxH9Xcyky4yrBEpeI8LS10PkyAQABSXV+nAS1aBE6/X9RtDPm/jS41E1gqHig+VF1zP42/B8h4hiyrxWBawuVVgaTP4H4Uo/4qyIMWHWFB/J4CzsgPg6+mfmzrFZ0TDwW49R/Qh5PLq8RSy5hyTEA6+Snp+JpgxmPqbDaQwQnicXN+9wXr0Ezozxjx1CHSAKS0JFtvzQ1MWVDWbck3wXt7N9Hwe0bnyOCp6E5HsV0FHOgsWasjqYIBhzQC6IK2za8fmvHTBVHx1uqmVSU7hnN+ZdYJi5vKkDX0j+YN/HYCmwjG7wqOnMezdpiS60+IU9nYf+HwL68KeI9FoGzbjeztlKg7NhKGEf9z4zg5dciuYXIgpF1TrfwzxTY+Y9QjGZNRBnj8cefIvU8Xn+UlnOLgmJqyW4fQB2ttWVXzQHQXYd8JKLYkLZOwlj1wenZTgIdZviDwvRi+aMNBWcS4yIc3Jjut0e/Rhday5Db75hWxRh3ewUpSlIiknx4Yqs6EZx8BW7C8EynDo7Nj+gZlSqMEbBsnrNLEYk4bO1c6I6gv9BSvLDwBjwFlYXLsgL5sCxGz44xjUTwlma2v0aFdwPGpLpDKLDaXkfklh1IRmfNDYsWuj7gdq6Y7vOu8He1i0IfPhyGU7KPcQS07Gj0eL14CpHnrdNs183vE3g=
+    file_glob: true
+    file: ./build/libs/*
+    skip_cleanup: true
+    target_commitsh: $TRAVIS_TAG
+    on:
+        repo: UpcraftLP/Olaf
+        tags: true
