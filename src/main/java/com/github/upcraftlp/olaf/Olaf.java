@@ -1,7 +1,7 @@
 package com.github.upcraftlp.olaf;
 
 import com.github.upcraftlp.glasspane.util.ModUpdateHandler;
-import net.minecraftforge.fml.common.*;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import static com.github.upcraftlp.olaf.Olaf.*;
@@ -24,14 +24,14 @@ public class Olaf {
     //Meta Information
     public static final String MODNAME = "Olaf";
     public static final String MODID = "olaf";
-    public static final String DEPENDENCIES = "after:glasspane;required-after:forge";
+    public static final String DEPENDENCIES = "required-after:glasspane;required-after:forge";
     public static final String UPDATE_JSON = "@UPDATE_JSON@";
 
     public static final String FINGERPRINT_KEY = "@FINGERPRINTKEY@";
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        if(Loader.isModLoaded("glasspane")) ModUpdateHandler.registerMod(MODID);
+        ModUpdateHandler.registerMod(MODID);
     }
 
 }
