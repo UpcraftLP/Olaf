@@ -36,6 +36,7 @@ public class Olaf {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         ModUpdateHandler.registerMod(MODID);
+        proxy.preInit(event);
     }
 
 }
