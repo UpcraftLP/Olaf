@@ -4,6 +4,8 @@ import com.github.upcraftlp.glasspane.api.util.*;
 import com.github.upcraftlp.glasspane.api.util.serialization.datareader.*;
 import com.github.upcraftlp.olaf.Olaf;
 import com.github.upcraftlp.olaf.config.OlafConfig;
+import com.github.upcraftlp.olaf.entity.ai.EntityAIAttackRangedIceBall;
+import net.minecraft.entity.ai.EntityAIAttackRanged;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -11,7 +13,7 @@ import net.minecraft.util.text.*;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.*;
 
 import java.util.*;
 
@@ -23,14 +25,16 @@ public class SnowGolemHandler {
     private static long lastMessage = 0;
     private static final Random RANDOM = new Random();
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOW)
     public static void onSpawnGolem(EntityJoinWorldEvent event) {
         if(event.getEntity() instanceof EntitySnowman) {
-            if(!event.getEntity().hasCustomName() && !event.getEntity().world.isRemote) {
-                event.getEntity().setCustomNameTag(COLOR_AQUA + "Olaf");
-                event.getEntity().setAlwaysRenderNameTag(true);
+            EntitySnowman snowman = (EntitySnowman) event.getEntity();
+            if(!snowman.hasCustomName() && !snowman.world.isRemote) {
+                snowman.setCustomNameTag(COLOR_AQUA + "Olaf");
+                snowman.setAlwaysRenderNameTag(true);
             }
-            //TODO replace attack task with custom task that also fires ice
+            snowman.tasks.taskEntries.removeIf(entry -> entry.action.getClass() == EntityAIAttackRanged.class); //*should* be safe as the entity is not yet added to the world
+            snowman.tasks.addTask(1, new EntityAIAttackRangedIceBall(snowman, 1.25D, 20, 10.0F));
         }
     }
 
