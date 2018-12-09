@@ -1,3 +1,17 @@
 #PARSE_ESCAPES
 
-#empty file, this is just so that forge doesn't complain
+#Entities
+entity.olaf.ice_ball.name=Ice Ball
+
+#Damage Sources
+death.attack.olaf.freeze_0=%2$s froze %1$s
+death.attack.olaf.freeze_0.item=%2$s froze %1$s using %3$s
+death.attack.olaf.freeze_1=%2$s turned %1$s into ice cubes
+death.attack.olaf.freeze_1.item=%2$s turned %1$s into ice cubes using %3$s
+death.attack.olaf.freeze_2=%2$s chilled %1$s
+death.attack.olaf.freeze_2.item=%2$s chilled %1$s using %3$s
+death.attack.olaf.freeze_3=%1$s was given an icy make over by %2$s
+death.attack.olaf.freeze_4=%2$s turned %1$s into a meat popsicle
+death.attack.olaf.freeze_4.item=%2$s turned %1$s into a meat popsicle using %3$s
+death.attack.olaf.freeze_5=%1$s lost a snowball fight to %2$s
+death.attack.olaf.freeze_6=%1$s lost winter jam to %2$s

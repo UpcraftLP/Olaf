@@ -1,7 +1,8 @@
 package com.github.upcraftlp.olaf;
 
+import com.github.upcraftlp.glasspane.api.proxy.IProxy;
 import com.github.upcraftlp.glasspane.util.ModUpdateHandler;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import static com.github.upcraftlp.olaf.Olaf.*;
@@ -28,6 +29,9 @@ public class Olaf {
     public static final String UPDATE_JSON = "@UPDATE_JSON@";
 
     public static final String FINGERPRINT_KEY = "@FINGERPRINTKEY@";
+
+    @SidedProxy(clientSide = "com.github.upcraftlp.olaf.proxy.ClientProxy", serverSide = "com.github.upcraftlp.olaf.proxy.ServerProxy")
+    public static IProxy proxy;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
