@@ -40,15 +40,14 @@ public class EntityIceBall extends EntitySnowball {
 
     @Override
     protected void onImpact(RayTraceResult result) {
-        if(result.entityHit != null) {
-            Entity target = result.entityHit;
-            if(target == this.thrower && this.ticksExisted < 5) return; //don't hit the player when moving
-            float damage = target instanceof EntityBlaze ? 5.0F : 200.0F;
-            if(target instanceof EntityLivingBase) ((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 40, 2));
-            target.attackEntityFrom(OlafDamageSources.causeFreezeDamage(this, this.getThrower()), damage);
-        }
-
+        if(result.entityHit == this.thrower && this.ticksExisted < 3) return; //don't hit the player when moving
         if(!this.world.isRemote) {
+            if(result.entityHit != null) {
+                Entity target = result.entityHit;
+                float damage = target instanceof EntityBlaze ? 5.0F : 2.0F;
+                if(target instanceof EntityLivingBase) ((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 45, 2));
+                target.attackEntityFrom(OlafDamageSources.causeFreezeDamage(this, this.getThrower()), damage);
+            }
             this.world.setEntityState(this, (byte) 3);
             this.setDead();
         }

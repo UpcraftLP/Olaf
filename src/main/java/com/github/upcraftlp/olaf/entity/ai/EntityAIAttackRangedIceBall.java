@@ -13,10 +13,6 @@ public class EntityAIAttackRangedIceBall extends EntityAIAttackRanged {
         super(attacker, movespeed, maxAttackTime, maxAttackDistanceIn);
     }
 
-    public EntityAIAttackRangedIceBall(IRangedAttackMob attacker, double movespeed, int attackIntervalMin, int maxAttackTime, float maxAttackDistanceIn) {
-        super(attacker, movespeed, attackIntervalMin, maxAttackTime, maxAttackDistanceIn);
-    }
-
     @Override
     public void updateTask() {
         double d0 = this.entityHost.getDistanceSq(this.attackTarget.posX, this.attackTarget.getEntityBoundingBox().minY, this.attackTarget.posZ);
@@ -59,7 +55,6 @@ public class EntityAIAttackRangedIceBall extends EntityAIAttackRanged {
     }
 
     private static void attackWithIceBall(EntityLivingBase source, EntityLivingBase target) {
-        System.out.println("using!");
         EntityIceBall iceBall = new EntityIceBall(source.world, source);
         double d0 = target.posY + (double)target.getEyeHeight() - 1.100000023841858D;
         double d1 = target.posX - source.posX;

@@ -38,12 +38,13 @@ public class SnowGolemHandler {
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     @SubscribeEvent
     public static void onUpdateSnowGolem(LivingEvent.LivingUpdateEvent event) {
         if(OlafConfig.showTextLines && event.getEntityLiving() instanceof EntitySnowman && event.getEntityLiving().isServerWorld()) {
             EntitySnowman snowman = (EntitySnowman) event.getEntityLiving();
             long currentTime = snowman.world.getTotalWorldTime();
-            if(currentTime - lastMessage > OlafConfig.minSoundDelay && RANDOM.nextDouble() < OlafConfig.chance) {
+            if(currentTime - lastMessage > OlafConfig.minTextDelay && RANDOM.nextDouble() < OlafConfig.textChance) {
                 for(EntityPlayer player : snowman.world.getEntitiesWithinAABB(EntityPlayer.class, snowman.getEntityBoundingBox().grow(5.0D, 2.0D, 5.0D))) {
                     ITextComponent text = new TextComponentString("<").appendSibling(snowman.getDisplayName()).appendText("> ").appendSibling(new TextComponentString(CollectionUtils.getRandomElement(SNOWMAN_LINES)).setStyle(new Style().setItalic(true)));
                     player.sendMessage(text);
