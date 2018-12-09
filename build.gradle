@@ -178,8 +178,8 @@ jar {
             "Implementation-Version": "${project.mod_version}",
             "Maven-Artifact": "${project.group}:${artifactID}:${project.version}",
             "Timestamp": buildTimeStamp,
-            "Built-On": "${project.mc_version}-${project.forge_version}"
-            //"FMLAT": "${project.modid}_at.cfg"
+            "Built-On": "${project.mc_version}-${project.forge_version}",
+            "FMLAT": "${project.modid}_at.cfg"
     )
 }
 
