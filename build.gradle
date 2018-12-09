@@ -260,7 +260,7 @@ publishing {
 
 def curseRelations = {
     //requiredDependency '' //add curseforge-slug here
-    optionalDependency 'glasspane'
+    requiredDependency 'glasspane'
 }
 
 
