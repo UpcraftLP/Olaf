@@ -6,3 +6,4 @@ Version 1.0.0
 - added text lines for snowmen
 - added death messages
 - made snowmen shoot ice balls occasionally
+- added ice staff
