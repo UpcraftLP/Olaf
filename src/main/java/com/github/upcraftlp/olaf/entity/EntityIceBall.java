@@ -1,11 +1,13 @@
 package com.github.upcraftlp.olaf.entity;
 
-import com.github.upcraftlp.olaf.init.OlafDamageSources;
+import com.github.upcraftlp.olaf.init.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityBlaze;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.stats.RecipeBookServer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -38,6 +40,7 @@ public class EntityIceBall extends EntitySnowball {
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onImpact(RayTraceResult result) {
         if(result.entityHit == this.thrower && this.ticksExisted < 3) return; //don't hit the player when moving
@@ -45,10 +48,17 @@ public class EntityIceBall extends EntitySnowball {
             if(result.entityHit != null) {
                 Entity target = result.entityHit;
                 float damage = target instanceof EntityBlaze ? 5.0F : 2.0F;
-                if(target instanceof EntityLivingBase) ((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 45, 2));
+                if(target instanceof EntityLivingBase) {
+                    ((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 45, 2));
+                    if(target instanceof EntityPlayerMP) {
+                        RecipeBookServer recipeBook = ((EntityPlayerMP) target).getRecipeBook();
+                        if(!recipeBook.isUnlocked(OlafRecipes.ICE_STAFF)) recipeBook.unlock(OlafRecipes.ICE_STAFF);
+                    }
+                }
+                target.hurtResistantTime = 0;
                 target.attackEntityFrom(OlafDamageSources.causeFreezeDamage(this, this.getThrower()), damage);
             }
-            this.world.setEntityState(this, (byte) 3);
+            this.world.setEntityState(this, (byte) 3); //see handleStatusUpdate()
             this.setDead();
         }
     }

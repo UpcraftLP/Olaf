@@ -7,6 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.*;
 
 @SuppressWarnings("unused")
+@GameRegistry.ObjectHolder(Olaf.MODID)
 @AutoRegistry(Olaf.MODID)
 public class OlafEntities {
 

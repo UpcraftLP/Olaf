@@ -18,3 +18,10 @@ death.attack.olaf.freeze_4=%2$s turned %1$s into a meat popsicle
 death.attack.olaf.freeze_4.item=%2$s turned %1$s into a meat popsicle using %3$s
 death.attack.olaf.freeze_5=%1$s lost a snowball fight to %2$s
 death.attack.olaf.freeze_6=%1$s lost winter jam to %2$s
+
+#Items
+item.olaf.ice_staff.name=Ice Staff
+item.olaf.ice_staff.desc=Fire Mode: %s
+message.olaf.staff_mode_changed=Staff mode changed to: %s
+item.olaf.staff_mode.single=Single
+item.olaf.staff_mode.burst=Burst

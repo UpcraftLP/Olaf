@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "  I",
+        " S ",
+        "S  "
+    ],
+    "key": {
+        "I": {
+            "item": "minecraft:packed_ice",
+            "data": 0
+        },
+        "S": {
+            "type": "forge:ore_dict",
+            "ore": "stickWood"
+        }
+    },
+    "result": {
+        "item": "olaf:ice_staff"
+    }
+}
